@@ -1,0 +1,82 @@
+#python script for modelling part 1
+start_line = 30
+file1 = "Credit.arff"
+
+columns = [1, 2, 6, 9, 12, 13]
+
+with open(file1, 'r') as file:
+    all_lines = file.readlines()
+    lines = all_lines[start_line - 1:]
+    contentBeforeStart = all_lines[:start_line - 1]
+
+with open("newCredit.arff", 'w') as output:
+    output.writelines(contentBeforeStart)
+    for line in lines:
+        values = line.split(',')
+
+        extractedValues = []
+        for i, value in enumerate(values):
+            if i in columns:
+                x = float(value.strip())
+                if i == 1:
+                    if 25 > x:
+                        extractedValues.append('1')
+                    elif x >= 25 and 50 > x:
+                        extractedValues.append('2');
+                    else:
+                        extractedValues.append('3');
+                elif i == 2:
+                    if 4 > x:
+                        extractedValues.append('1')
+                    elif x >= 4 and 8 > x:
+                        extractedValues.append('2')
+                    else:
+                        extractedValues.append('3');
+                elif i == 6:
+                    if 1 > x:
+                        extractedValues.append('1')
+                    elif x >= 1 and 5 > x:
+                        extractedValues.append('2')
+                    elif x >= 2 and 3 > x:
+                        extractedValues.append('3')
+                    elif x >= 3 and 4 > x:
+                        extractedValues.append('4')
+                    elif x >= 4 and 5 > x:
+                        extractedValues.append('5')
+                    else:
+                        extractedValues.append('6')
+                elif i == 9:
+                    if x == 0:
+                        extractedValues.append('1')
+                    elif x > 0 and 10 > x:
+                        extractedValues.append('2')
+                    else:
+                        extractedValues.append('3')
+                elif i == 12:
+                    if 100 > x:
+                        extractedValues.append('1')
+                    elif x >= 100 and 200 > x:
+                        extractedValues.append('2')
+                    elif x >= 200 and 300 > x:
+                        extractedValues.append('3')
+                    elif x >= 300 and 400 > x:
+                        extractedValues.append('4')
+                    elif x >= 400 and 500 > x:
+                        extractedValues.append('5')
+                    else:
+                        extractedValues.append('6')
+                elif i == 13:
+                    if 100 > x:
+                        extractedValues.append('1')
+                    elif x >= 100 & 1000 > x:
+                        extractedValues.append('2')
+                    elif x >= 1000 & 10000 > x:
+                        extractedValues.append('3')
+                    else:
+                        extractedValues.append('4')
+                else:
+                    extractedValues.append(value.strip())
+            else:
+                extractedValues.append(value.strip()) #in order to include all other values
+
+        output.write(','.join(extractedValues) + '\n')
